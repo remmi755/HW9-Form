@@ -6,23 +6,33 @@
     margin: 10px 6%;
     position: relative;
 }
+
 .active {
     background-color: #0bef0b;
 }
+
 #btn {
     padding: 5px;
 }
-#input{
-    margin: 50px 20px 50px 40%;
+
+#input {
+    margin: 50px 20px 0 40%;
     padding: 5px 20px;
+
 }
 
-.newBtn{
+.newBtn {
     border: 1px solid grey;
     position: absolute;
     right: 0;
 }
-#ul{
+
+#ul {
     margin-left: 35%;
     padding: 5px 20px;
+}
+
+.invalid {
+    border: 2px solid red;
+    color: red;
 }

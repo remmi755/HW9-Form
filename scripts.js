@@ -1,37 +1,54 @@
 let inputUser = document.querySelector('input');
 const ul = document.querySelector('ul')
 let elem = document.getElementsByTagName('li')
-const body = document.getElementsByTagName('body')[0]
+const form = document.getElementsByTagName('form')[0]
 
 function createItem(value) {
 
     return `<li class="li">${value}<button class="newBtn">${'Удалить'}</button></li>`
 }
 
-function clear(el){
+function clear(el) {
     el.remove()
 }
 
-function addElement(){
+function addElement() {
     elem = inputUser.value
     ul.innerHTML += createItem(elem)
 }
 
-body.addEventListener('click', function (event) {
+function getValid() {
+    let regExp = /^[^\s\W][\w\s]{1,14}$/i;
+    return regExp.test(inputUser.value)
+}
+
+inputUser.addEventListener('input', function () {
+
+    if (getValid() !== true) {
+        inputUser.classList.add('invalid')
+    } else {
+        inputUser.classList.remove('invalid')
+
+    }
+
+})
+
+form.addEventListener('click', function (event) {
         let target = event.target
 
-        if(target.tagName === 'BUTTON' && target.className === 'add-new-string' && inputUser.value !== '') {
+        if (target.tagName === 'BUTTON' && target.className === 'add-new-string' && inputUser.value !== '' && getValid() === true) {
             addElement()
             inputUser.value = ''
         }
 
-        if(target.tagName === 'LI')  {
+        if (target.tagName === 'LI') {
             target.classList.toggle('active')
         }
 
-        if(target.tagName === 'BUTTON' &&  target.className ==='newBtn') {
+        if (target.tagName === 'BUTTON' && target.className === 'newBtn') {
 
             clear(target.closest('li'))
         }
+        event.preventDefault()
     }
 )
