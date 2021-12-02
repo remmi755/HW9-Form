@@ -18,13 +18,13 @@ function addElement() {
 }
 
 function getValid() {
-    let regExp = /^[^\s\W][\w\s]{1,14}$/i;
+    let regExp = /^[\w\s]{2,15}$/i;
     return regExp.test(inputUser.value)
 }
 
 inputUser.addEventListener('input', function () {
 
-    if (getValid() !== true) {
+    if (getValid() !== true ) {
         inputUser.classList.add('invalid')
     } else {
         inputUser.classList.remove('invalid')
@@ -33,22 +33,27 @@ inputUser.addEventListener('input', function () {
 
 })
 
-form.addEventListener('click', function (event) {
-        let target = event.target
+ul.addEventListener('click', function (event) {
+    let target = event.target
 
-        if (target.tagName === 'BUTTON' && target.className === 'add-new-string' && inputUser.value !== '' && getValid() === true) {
+    if (target.tagName === 'LI') {
+        target.classList.toggle('active')
+    }
+
+    if (target.tagName === 'BUTTON' && target.className === 'newBtn') {
+
+        clear(target.closest('li'))
+    }
+})
+
+form.addEventListener('submit', function (event) {
+        event.preventDefault()
+        if (inputUser.value !== '' && getValid() === true) {
+
             addElement()
             inputUser.value = ''
-        }
 
-        if (target.tagName === 'LI') {
-            target.classList.toggle('active')
         }
-
-        if (target.tagName === 'BUTTON' && target.className === 'newBtn') {
-
-            clear(target.closest('li'))
-        }
-        event.preventDefault()
     }
 )
+
